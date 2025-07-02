@@ -1,19 +1,15 @@
 services:
   - type: web
     name: tourism
-    env: php
+    env: docker
     plan: free
-    buildCommand: |
-      composer install
-      php artisan config:clear
-      php artisan cache:clear
-    startCommand: php -S 0.0.0.0:10000 -t public
+    dockerfilePath: ./Dockerfile
     autoDeploy: true
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        value: base64:your_generated_app_key
+        value: base64:your_app_key_here
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
@@ -21,8 +17,8 @@ services:
       - key: DB_PORT
         value: 3306
       - key: DB_DATABASE
-        value: tourism_db
+        value: your_db_name
       - key: DB_USERNAME
-        value: your_username
+        value: your_db_user
       - key: DB_PASSWORD
-        value: your_password
+        value: your_db_password
