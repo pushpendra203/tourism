@@ -2,15 +2,27 @@ services:
   - type: web
     name: tourism
     env: php
-    region: oregon
     plan: free
     buildCommand: |
-      composer install --no-dev --optimize-autoloader
+      composer install
       php artisan config:clear
-      php artisan config:cache
+      php artisan cache:clear
     startCommand: php -S 0.0.0.0:10000 -t public
+    autoDeploy: true
     envVars:
       - key: APP_ENV
         value: production
-      - key: APP_DEBUG
-        value: false
+      - key: APP_KEY
+        value: base64:your_generated_app_key
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: your_mysql_host
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        value: tourism_db
+      - key: DB_USERNAME
+        value: your_username
+      - key: DB_PASSWORD
+        value: your_password
